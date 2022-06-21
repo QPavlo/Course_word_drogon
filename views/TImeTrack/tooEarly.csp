@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.cdnfonts.com/css/abyssinica-sil" rel="stylesheet">
+    <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1"/>
+    <title>too early</title>
+</head>
+
+<body>
+<form action="http://localhost:3000/tooEarlyPage" method="post">
+    <div class="main">
+        <p class="sign" align="center" style="color: #178505">You came in too early.<br> Work start [[productionStartWork]] </p>
+        <div class="exitForm">
+            <div class="container">
+                <button name="tooEarlyKey" value="1" class="exitSuccessButton" align="center">
+                    <text class="exitSuccess">Ok</text>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+</body>
+
+</html>
+<style>
+    body {
+        background: linear-gradient(to right, #7a8fff, #60e7ff);
+        font-family: "Abyssinica SIL", sans-serif;
+    }
+
+    .main {
+        background-color: #dcdcdc;
+        width: 400px;
+        height: 240px;
+        margin: 7em auto;
+        border-radius: 0.5em;
+        box-shadow: 0 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+
+    .sign {
+        padding-top: 40px;
+        color: #5569aa;
+        font-family: "Abyssinica SIL", sans-serif;
+        font-weight: bold;
+        font-size: 23px;
+    }
+
+    .container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .exitSuccessButton {
+        margin-top: 10px;
+        width: 180px;
+        height: 60px;
+        cursor: pointer;
+        color: #595656;
+        border: 0;
+        border-radius: 0.5em;
+        outline: none;
+        transition: background-color 0.5s, border-radius 0.5s;
+        background: linear-gradient(to right, #2742b0, #6085ff);
+        margin-bottom: 2%;
+    }
+
+    .exitSuccessButton:hover {
+        background: linear-gradient(to right, #1b2c7e, #4f70c5);
+        border-radius: 25px;
+        color: #595656;
+
+    }
+
+    .exitSuccess {
+        color: white;
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+</style>
