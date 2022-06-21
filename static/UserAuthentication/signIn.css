@@ -1,0 +1,108 @@
+body {
+    background: linear-gradient(to right, #7a8fff, #60e7ff);
+    font-family: "Abyssinica SIL", sans-serif;
+}
+
+.main {
+    background-color: #dcdcdc;
+    width: 400px;
+    height: 420px;
+    margin: 7em auto;
+    border-radius: 0.5em;
+    box-shadow: 0 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.signInError{
+    display: none;
+    text-align: center;
+}
+
+.sign {
+    padding-top: 40px;
+    color: #5569aa;
+    font-family: "Abyssinica SIL", sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.uName, .pass {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 27px;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    justify-content: center;
+    font-family: "Abyssinica SIL", sans-serif;
+}
+
+.uName {
+    margin-bottom: 27px;
+}
+
+form.singInForm {
+    margin-top: 15px;
+}
+
+.uName:focus, .pass:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+
+.forgot {
+    margin-left : 15%;
+    text-shadow: 0 0 3px rgba(117, 117, 117, 0.12);
+    color: #7792ea;
+    text-decoration: none;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.signInButton {
+    margin-top: 30px;
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    border: 0;
+    border-radius:  0.5em;
+    outline: none;
+    transition: background-color 0.5s, border-radius 0.5s;
+    background: linear-gradient(to right, #2742b0, #6085ff);
+    margin-bottom: 2%;
+}
+
+.signInButton:hover {
+    background: linear-gradient(to right, #1b2c7e, #4f70c5);
+    border-radius: 25px;
+}
+
+.signInText {
+    color: white;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.signUp {
+    text-shadow: 0 0 3px rgba(117, 117, 117, 0.12);
+    color: #7798ea;
+    text-decoration: none;
+}
+
+.signUpText {
+    color: #5570aa;
+    text-shadow: 0 0 3px rgba(117, 117, 117, 0.12);
+}
+
+#togglePassword {
+    position: absolute;
+    margin-top: 7px;
+    margin-left: 270px;
+    cursor: pointer;
+}
