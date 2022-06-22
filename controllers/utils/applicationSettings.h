@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 namespace adminSetting {
@@ -47,7 +48,7 @@ namespace mailMessages {
             "    font-weight: bold;\n"
             "    font-size: 23px;\n"
             "    margin: 30px;\">Unfortunately you have been banned permanently, access to the site is blocked forever\n"
-            "        use the site again</p>\n"
+            "    </p>\n"
             "    <form class=\"singInForm\">\n"
             "\n"
             "\n"
@@ -124,7 +125,7 @@ namespace mailMessages {
             "            color: green;\n"
             "            font-family: 'Abyssinica SIL', sans-serif;\n"
             "            font-weight: bold;\n"
-            "            font-size: 29px;\">your account is unlocked</p>\n"
+            "            font-size: 29px;\">Your account is unlocked</p>\n"
             "    <p class=\"sign1\" align=\"center\" style=\"padding-top: 20px;\n"
             "            color: rgba(32, 32, 32, 0.66);\n"
             "            font-family: 'Abyssinica SIL', sans-serif;\n"
@@ -143,7 +144,7 @@ namespace mailMessages {
     };
 
     std::string updateWorkScheduleMessage(const std::string &newPosition, const std::string &newShiftStart,
-                                   const std::string &newShiftFinish, const std::string &newWorkingDays);
+                                          const std::string &newShiftFinish, const std::string &newWorkingDays);
 }
 
 enum Role {

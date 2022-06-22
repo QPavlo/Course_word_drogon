@@ -220,7 +220,7 @@ auto blockTempUserFlag = @@.get<int>("blockTempUserFlag");
                 </div>
                  <div class="tab-pane fade" id="access" role="tabpanel" aria-labelledby="password-tab">
                      <h3 class="mb-4" style="color: #e1aa24;">User access settings</h3>
-                         <p style="font-size: 20px" for="unblockCheck">Account is permanently locked</p>
+                         <p style="font-size: 20px" for="unblockCheck">Account is permanently locked<br> you cannot restore the user's access to the account</p>
                  </div>
             </div>
         </div>

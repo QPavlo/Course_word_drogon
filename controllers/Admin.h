@@ -16,8 +16,8 @@ public:
         ADD_METHOD_TO(ExecutorAuthentication::signIn, "/Admin/signIn", drogon::Post);
         ADD_METHOD_TO(ExecutorAuthentication::showUsers, "/Admin/showUsers", drogon::Post);
         ADD_METHOD_TO(ExecutorAuthentication::editUserPage, "/Admin/editUserPage", drogon::Post);
-        ADD_METHOD_TO(ExecutorAuthentication::showUsersWithUpdate, "/Admin/updateUsersViewData", drogon::Post);
         ADD_METHOD_TO(ExecutorAuthentication::editEmptyUserPage, "/Admin/editEmptyUserPage", drogon::Post);
+        ADD_METHOD_TO(ExecutorAuthentication::showUsersWithUpdate, "/Admin/updateUsersViewData", drogon::Post);
         ADD_METHOD_TO(ExecutorAuthentication::editUserSettings, "/Admin/editUserSettings", drogon::Post);
         ADD_METHOD_TO(ExecutorAuthentication::editEmptyUserSettings, "/Admin/editEmptyUserSettings", drogon::Post);
         ADD_METHOD_TO(ExecutorAuthentication::showUserStatistics, "/Admin/ShowUserStatistics", drogon::Post);

@@ -35,6 +35,38 @@ void UserAuthentication::signIn(const HttpRequestPtr &req,
                         callback(resp);
 
                     } else {
+                        auto selectedUserRole{r.front()["Role"].as<int>()};
+
+                        switch (selectedUserRole) {
+                            case Role::TEMP_BAN : {
+                                auto resp{
+                                        HttpResponse::newHttpViewResponse(
+                                                "attendanceCheck.csp")
+                                };
+                                callback(resp);
+                                return;
+                            }
+                            case Role::FOREVER_BAN: {
+                                auto resp{
+                                        HttpResponse::newHttpViewResponse(
+                                                "permanentBlockAccPage.csp")
+                                };
+                                callback(resp);
+                                return;
+                            }
+
+                            case Role::UNBLOCKED: {
+                                auto resp{
+                                        HttpResponse::newHttpViewResponse(
+                                                "unBlockAccPage.csp")
+                                };
+                                callback(resp);
+                                return;
+                            }
+                            default:;
+                        }
+
+
                         clientPtr->execSqlAsync(
                                 "select ud.username, shift_start, shift_finish, break_start, break_finish, attendance_status, date, working_days from user_general\n"
                                 "inner join user_details ud ON user_general.username = ud.username\n"

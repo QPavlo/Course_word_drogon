@@ -558,4 +558,8 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 *.tlog
 
+# My files
+db/draft
+db/ubdate_db/.update_db.sh.swp
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,visualstudio,visualstudiocode,cmake,c,c++

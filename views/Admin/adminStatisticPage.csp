@@ -32,7 +32,7 @@ auto unblockStatusFlag = @@.get<int>("userUnblockFlag");
     <%c++ } else {%>
         <p class="banUserText" align="center" style="color: #ea7217;">
           User: [[username]]<br> was {%blockStatusText%}</p>
-        <%c++ }%>
+    <%c++ }%>
         <div class="exitForm">
             <div class="container_ban">
                 <button class="exitSuccessButton" align="center" onclick="modal.style.display = 'none'">
@@ -166,20 +166,20 @@ auto unblockStatusFlag = @@.get<int>("userUnblockFlag");
 
         <%c++ if(entry.second[2] == "0") { %>
                           <tr>
-                            <td>{%entry.second[0]%}</td>
-                            <td>{%entry.second[1]%}</td>
-                            <td>{%entry.first%}</td>
-                            <td class="moreTd">
-                            <div class="option">
+                                <td>{%entry.second[0]%}</td>
+                                <td>{%entry.second[1]%}</td>
+                                <td>{%entry.first%}</td>
+                                <td class="moreTd">
+                                <div class="option">
 
-                            <form action="http://localhost:3000/Admin/editEmptyUserPage" method="post">
-                                    <input type="hidden" name="firstname" value="{%entry.second[0]%}">
-                                    <input type="hidden" name="surname" value="{%entry.second[1]%}">
-                                    <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
-                            </form>
+                                <form action="http://localhost:3000/Admin/editEmptyUserPage" method="post">
+                                        <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                                        <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                                        <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
+                                </form>
 
-                            </div>
-                            </td>
+                                </div>
+                                </td>
                           </tr>
       <%c++ } %>
 
@@ -197,10 +197,8 @@ auto unblockStatusFlag = @@.get<int>("userUnblockFlag");
                                                     <input type="hidden" name="firstname" value="{%entry.second[0]%}">
                                                     <input type="hidden" name="surname" value="{%entry.second[1]%}">
                                                     <input type="hidden" name="blockType" value="temp">
-
                                                     <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
                                             </form>
-
                                             </div>
                                             </td>
                                           </tr>
@@ -208,14 +206,13 @@ auto unblockStatusFlag = @@.get<int>("userUnblockFlag");
       <%c++ }else if(usersType == 4){ %>
                   <%c++ if(entry.second[2] == "4"){%>
                         <tr>
-
                                                   <td>{%entry.second[0]%}</td>
                                                   <td>{%entry.second[1]%}</td>
                                                   <td>{%entry.first%}</td>
                                                   <td class="moreTd">
                                                   <div class="option">
 
-                                                  <form action="http://localhost:3000/Admin/editEmptyUserPage" method="post">
+                                                  <form action="http://localhost:3000/Admin/editUserPage" method="post">
                                                           <input type="hidden" name="firstname" value="{%entry.second[0]%}">
                                                           <input type="hidden" name="surname" value="{%entry.second[1]%}">
                                                            <input type="hidden" name="blockType" value="forever">

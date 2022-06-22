@@ -1,4 +1,4 @@
-#include "AdminAuthentication.h"
+#include "Admin.h"
 
 using namespace drogon;
 using namespace drogon::orm;
@@ -232,10 +232,7 @@ void ExecutorAuthentication::editUserSettings(const HttpRequestPtr &req,
         data.insert("city", req->getParameter("city"));
         data.insert("zip_code", req->getParameter("zip_code"));
         data.insert("phone_number", req->getParameter("phone_number"));
-        data.insert("count_updated_fields", (//countAffectedRowsUserGeneral+
-                countAffectedRowsUserDetails));
-
-//             updateSessionViewData(session, data);
+        data.insert("count_updated_fields", countAffectedRowsUserDetails);
         auto resp{HttpResponse::newHttpViewResponse("adminUserSettings.csp", data)};
         callback(resp);
     } catch (const DrogonDbException &e) {
@@ -346,7 +343,6 @@ void ExecutorAuthentication::editEmptyUserSettings(const HttpRequestPtr &req,
                 " values ($1, $2, $3)", username, static_cast<char>(attendanceStatus::FIRST_WORK_DAY_ABSENT),
                 temp_date);
 
-        //  size_t countAffectedRowsUserGeneral{affectedRowsUserGeneral.affectedRows()};
         size_t countAffectedRowsUserDetails{affectedRowsUserDetails.affectedRows()};
 
         LOG_INFO << countAffectedRowsUserDetails << "row updated";
@@ -365,8 +361,7 @@ void ExecutorAuthentication::editEmptyUserSettings(const HttpRequestPtr &req,
         data.insert("count_updated_fields", countAffectedRowsUserDetails);
 
         data.insert("emptyUserFlag", 0);
-        if ((countAffectedRowsUserDetails
-            ) > 0) {
+        if ((countAffectedRowsUserDetails) > 0) {
             session->insert("updateFlag", 1);
         } else {
             session->erase("updateFlag");
@@ -455,7 +450,6 @@ void ExecutorAuthentication::showUserStatistics(const HttpRequestPtr &req,
                     session->insert("shiftFinish", removeSeconds(shiftInfo["temp_shift_finish"].as<std::string>()));
                 }
 
-
                 HttpViewData data;
                 data.insert("username", username);
                 data.insert("shiftStart", session->get<std::string>("shiftStart"));
@@ -495,7 +489,6 @@ void ExecutorAuthentication::banUser(const HttpRequestPtr &req,
 
     HttpViewData data;
     if (banStatus == "Temp") {
-//        updateDateStatisticInSession()
         clientPtr->execSqlSync("update user_general set role = $1 where username = $2",
                                static_cast<int>(Role::TEMP_BAN), username);
         updateUserRoleDataSession(std::to_string(Role::TEMP_BAN));
