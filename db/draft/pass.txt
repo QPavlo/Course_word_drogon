@@ -1,2 +1,0 @@
-admin_first_password
-Long_And_Strong_Password_For_Admin_Account_1234

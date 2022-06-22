@@ -1,8 +1,0 @@
--- SELECT *
--- FROM dateStatistic ds
--- JOIN userIntermediateStatistic uis ON ds.date = ds.date
--- JOIN userGeneral ug ON ug.username = uis.username
--- WHERE ug.username = $1
---
---
--- /*insert into userGeneral (firstName, secondName, username,password, role) values ('Name3','SName3', 'UName3', 'pass3', 1);*/
