@@ -449,9 +449,6 @@ void UserAttendance::openTableViewPage(const HttpRequestPtr &req,
                         [&](std::map<std::string, std::array<std::string, 8>> &usersStatistic,
                             const Result &result) {
                             for (const auto &entry: result) {
-                                LOG_INFO <<
-                                         entry["count_worked_hour_and_minutes"]
-                                                 .as<std::string>();
                                 totalAmountHoursWorked = timeArithmetic(totalAmountHoursWorked,
                                                                         removeSeconds(
                                                                                 entry["count_worked_hour_and_minutes"]
