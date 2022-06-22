@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<%c++
+    auto count_updated_fields=@@.get<size_t>("count_updated_fields");
+    auto errorPassword = @@.get<int>("errorPassword");
+    auto passChangedFlag = @@.get<int>("passChangedFlag");
+%>
+    <head>
+
+        <meta charset="UTF-8">
+        <title>Account Settings</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" type="text/css"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.cdnfonts.com/css/abyssinica-sil" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="static/AttendanceCheck/UserSettings/style.css">
+    </head>
+    <body>
+
+    <div id="myModal" class="modal">
+        <div class="main">
+            <p class="sign" align="center" style="color: #178505">profile setting successfully changed </p>
+            <div class="exitForm">
+                <div class="container">
+                    <button class="exitSuccessButton" align="center" onclick=" modal.style.display = 'none'">
+                        <text class="exitSuccess">Close</text>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-5 my-5" style="border-right: 100px">
+        <div class="container">
+            <!--        <h1 class="mb-5">Account Settings</h1>-->
+            <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+                <div class="profile-tab-nav border-right">
+                    <div class="p-4">
+                        <div class="img-circle text-center mb-3">
+                            <!--                        <img src="img/user2.jpg" alt="Image" class="shadow">-->
+                        </div>
+                        <h4 class="text-center">[[firstname]] [[surname]]</h4>
+                    </div>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link" id="account-tab" data-toggle="pill" href="#account" role="tab"
+                           aria-controls="account" aria-selected="true">
+                            <i class="fa fa-home text-center mr-1"></i>
+                            Account
+                        </a>
+                        <a class="nav-link active" id="password-tab" data-toggle="pill" href="#password" role="tab"
+                           aria-controls="password" aria-selected="false">
+                            <i class="fa fa-key text-center mr-1"></i>
+                            Password
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+
+                    <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <form action="http://localhost:3000/closeSettingsPage" method="post">
+                            <button class="btn btn-light" style="float: right !important";>close</button>
+                        </form>
+                        <h3 class="mb-4">Account Settings</h3>
+                        <form action="http://localhost:3000/updateUserSettings" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" name="firstname" class="form-control" value=[[firstname]]>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" name="surname" class="form-control" value=[[surname]]>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email/Username</label>
+                                        <input type="text" class="form-control" value=[[username]] readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone number</label>
+                                        <input type="text" name="phone_number" class="form-control" value=[[phone_number]]>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Street</label>
+                                        <input type="text" name="street" class="form-control" value=[[street]]>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" name="city" class="form-control" value=[[city]]>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Zip-code</label>
+                                        <input type="text" name="zip_code" class="form-control" value=[[zip_code]]>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Position</label>
+                                        <input type="text" name="appointment" class="form-control" value=[[appointment]]
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Shift start</label>
+                                        <input id="shiftStartTime" type="time" name="shiftStart" class="form-control" value=[[shiftStart]] readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Shift finish</label>
+                                        <input id="shiftFinishTime" type="time" name="shiftFinish" class="form-control" value=[[shiftFinish]] readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="myButtonUpdate">
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                        <form action="http://localhost:3000/userSettingsPage" method="post">
+                            <div class="myButtonCancel">
+                                <button class="btn btn-light">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade show active" id="password" role="tabpanel" aria-labelledby="password-tab">
+                        <h3 class="mb-4">Password Settings</h3>
+                             <form action="http://localhost:3000/updateUserPassword" method="post">
+                                              <div class="row">
+                                                  <div class="col-md-6">
+                                                      <div class="form-group">
+                                                          <label>Old password</label>
+                                                          <input name="password" type="password" class="form-control">
+                                                           <%c++ if(errorPassword == 2) {%>
+                                                              <p style="color: red">Incorrect password</p>
+                                                           <%c++ }%>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-md-6">
+                                                      <div class="form-group">
+                                                          <label>New password</label>
+                                                          <input name="new_password" type="password" class="form-control">
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                      <div class="form-group">
+                                                          <label>Confirm new password</label>
+                                                          <input type="password" name="confirmNewPassword" class="form-control">
+                                                          <%c++ if(errorPassword == 1) {%>
+                                                                <p style="color: red">Passwords not same</p>
+                                                          <%c++ }%>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="myButtonUpdate">
+                                                <button class="btn btn-primary">Update</button>
+
+                                              </div>
+                                          </form>
+                        <div>
+                            <form action="http://localhost:3000/userSettingsPage" method="post">
+                                <div class="myButtonCancel">
+                                    <button class="btn btn-light">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let modal = document.getElementById("myModal");
+        <%c++ if(passChangedFlag != 0) { %>
+            modal.style.display = 'block';
+            <%c++ } %>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </body>
+</html>

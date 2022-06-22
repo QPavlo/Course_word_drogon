@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<%inc#include "../controllers/utils/timeDateHandler.h" %>
+<%c++
+auto usersGeneral=@@.get<std::map<std::string, std::array<std::string, 3>>>("usersGeneralAll");
+auto usersStatisticAll=@@.get<std::map<std::string, std::array<std::string, 8>>>("usersStatisticAll");
+auto usersType = @@.get<int>("usersType");
+auto currentDate_YY_MM = @@.get< std::chrono::year_month>("currentDate_YY_MM");
+std::string currentDateStr;
+size_t countOfPasses = 0;
+size_t countOfDelay = 0;
+size_t countOfInTime = 0;
+
+
+if(static_cast<unsigned int>(currentDate_YY_MM.month()) <= 9){
+    currentDateStr = (std::to_string(static_cast<int>(currentDate_YY_MM.year())) + "-0" + std::to_string(static_cast<unsigned>(currentDate_YY_MM.month())));
+} else{
+    currentDateStr = (std::to_string(static_cast<int>(currentDate_YY_MM.year())) + "-" + std::to_string(static_cast<unsigned>(currentDate_YY_MM.month())));
+}
+
+    %>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/AttendanceCheck/attendanceCheck.css">
+        <link rel="stylesheet" href="/static/Admin/StatisticsUser.css">
+
+        <title>Attendance check</title>
+    </head>
+    <body>
+
+    <div id="sidenav" class="column">
+        <div class="sidenavHeader">
+
+        </div>
+        <div class="sidenavHeaderBottom">
+            <form action="http://localhost:3000/Admin/showUsers" method="post">
+                  <button class="userTypeButton" onclick="usersType0()">All workers (no block)</button>
+                            <button class="userTypeButton" onclick="usersType1()">Employment workers</button>
+                            <button class="userTypeButton" onclick="usersType2()">Unemployment workers</button>
+                            <button class="userTypeButton1" onclick="usersType3()">Temporary block workers</button>
+                            <button class="userTypeButton1" onclick="usersType4()">Always block workers</button>
+
+                <input name="usersType" id="usersType" type="hidden">
+
+            </form>
+        </div>
+    </div>
+
+    <div id="AttendanceContent" class="column">
+        <div class="right_header">
+            <div class="dropdown">
+                <button><img id="profileImg" alt="profile" src="/static/AttendanceCheck/img/profile_img.png" height="48px"
+                             width="48px"></button>
+                <div class="dropdown-content">
+                    <div class="profileButtons">
+                        <form action="http://localhost:3000/userSettingsPage" method="post">
+                            <button id="profileSetting">Profile setting</button>
+                        </form>
+                    </div>
+                    <div class="profileButtons">
+                        <form action="http://localhost:3000/start" method="get">
+                            <button id="logOut">Log out</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="customerStatTable" style=" overflow: scroll;">
+     <div class="text_center">
+            User: [[username]] <br>
+            Shift start: [[shiftStart]]<br>
+            Shift Finish: [[shiftFinish]]<br>
+            Date: {%currentDateStr%}
+        </div>
+<div class="dateControllerButtons">
+            <form action="http://localhost:3000/Admin/ShowUserStatistics" method="post">
+                              <input type="hidden" name="username" value=[[username]]>
+                                <button class="prevButton" onclick="decreaseCurrentMonth()" name="currentDate" value="{%currentDateStr+"-dec"%}">Previous month</button>
+
+            <form action="http://localhost:3000/Admin/ShowUserStatistics" method="post">
+              <input type="hidden" name="username" value=[[username]]>
+                <button class="nextButton" onclick="increaseCurrentMonth()" name="currentDate" value="{%currentDateStr+"-inc"%}">Next month</button>
+
+             </div>
+        <table id="customerStat">
+            <tr>
+                <th>Date</th>
+                <th>Arrival time</th>
+                <th>Departure time</th>
+                <th>Break start</th>
+                <th>Break end</th>
+                <th>Working hours and minutes</th>
+                <th>Status</th>
+            </tr>
+
+            <%c++ for(const auto & entry:usersStatisticAll){%>
+            <tr>
+                <td>{%entry.first%}</td>
+                <td>{%entry.second[0]%}</td>
+                <td>{%entry.second[1]%}</td>
+                <td>{%entry.second[3]%}</td>
+                <td>{%entry.second[4]%}</td>
+                <td>{%entry.second[5]%}</td>
+                <td>{%statusParser(entry.second[2])%}</td>
+                <%c++
+                    if(entry.second[2] == "f"){
+                        countOfDelay += 1;
+                    } else if(entry.second[2] == "a"){
+                        countOfPasses += 1;
+                    } else if(entry.second[2] == "g"){
+                        countOfInTime +=1;
+                    }
+                %>
+            </tr>
+            <%c++ }%>
+        </table>
+    <div class="text_center1">
+            Amount of hours worked per current month: [[totalAmountHoursWorked]] <br>
+            Number of passes per current month: {%countOfPasses%}<br>
+            Number of delays per current month: {%countOfDelay%}<br>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        function usersType0(){
+            const usersType = document.getElementById('usersType');
+            usersType.value = '0';
+        }
+
+        function usersType1(){
+            const usersType = document.getElementById('usersType');
+            usersType.value = '1';
+        }
+
+ function usersType2(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '2';
+                }
+
+ function usersType3(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '3';
+                }
+
+                function usersType4(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '4';
+                }
+
+        function increaseCurrentMonth() {
+            return true;
+        }
+
+
+        function decreaseCurrentMonth() {
+            return true;
+        }
+
+        function usersType2(){
+            const usersType = document.getElementById('usersType');
+            usersType.value = '2';
+        }
+
+        function setUserName(username){
+            const usersType = document.getElementById('usersType');
+            usersType.value = username;
+        }
+    </script>
+
+    </body>
+</html>

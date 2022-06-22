@@ -1,0 +1,187 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+html {
+    font-size: 72.5%;
+}
+
+.container {
+    width: 100%;
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar {
+    margin-top: 0.4%;
+    border-radius: 2em;
+    width: 45rem;
+    height: 52rem;
+    background-color: #222227;
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+.month {
+    width: 100%;
+    height: 12rem;
+    border-top-right-radius: 2em;
+    border-top-left-radius: 2em;
+    background-color: #153a75;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.month i {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.month h1 {
+    font-size: 3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.month p {
+    font-size: 1.6rem;
+}
+
+.weekdays {
+    width: 100%;
+    height: 5rem;
+    padding: 0 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.weekdays div {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    width: calc(44.2rem / 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.days div {
+    font-size: 1.5rem;
+    margin: 0.3rem;
+    width: calc(40.2rem / 7);
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s;
+}
+
+
+.tableViewButton {
+    font-size: 20px;
+    margin: 1% auto;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0.5em;
+    padding: 16px 31px;
+    outline: none;
+    transition: background-color 0.5s, border-radius 0.5s;
+    color: black;
+    background: #f1f1f1;
+}
+
+.tableViewButton:hover {
+    background: #c4c4c4;
+    border-radius: 25px;
+}
+
+.prev-date, .next-date {
+    opacity: 0.5;
+}
+
+.meaning_of_squares {
+    margin-top: 20px !important;
+    margin-left: 45px !important;
+}
+
+.meaning_of_sq_text {
+    padding-top: 6px;
+    font-size: 25px;
+}
+
+.overwork {
+    background-color: royalblue;
+    color: white;
+}
+
+.anyGeneral {
+    background-color: #645e5e;
+    color: white;
+}
+
+.any {
+    background: linear-gradient(to right, #645e5e 70%, #d00000 30%);
+    color: white;
+}
+
+.inTime {
+    background-color: #19943b;
+    color: white;
+}
+
+.inTimeNotClose {
+    background: linear-gradient(to right, #19943b 70%, #d00000 30%);
+    color: white;
+}
+
+.late {
+    background-color: #ecbc1b;
+    color: white;
+}
+
+.lateNotClose {
+    background: linear-gradient(to right, #ecbc1b 70%, #d00000 30%);
+    color: white;
+}
+
+.firstDay {
+    background-color: white;
+    color: black;
+}
+
+.firstDayNotClose {
+    background: linear-gradient(to right, white 70%, #d00000 30%);
+    color: black;
+}
+
+.firstDayAbsent {
+    background-color: #e983af;
+    color: white;
+}
+
+.shortcomings {
+    background-color: #ff6200;
+    color: white;
+}
+
+.absent {
+    background-color: #d00000;
+    color: white;
+}

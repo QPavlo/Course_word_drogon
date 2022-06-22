@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%c++
+      auto err=@@.get<std::string>("signInError");
+%>
+
+<head>
+    <link href="https://fonts.cdnfonts.com/css/abyssinica-sil" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/static/UserAuthentication/signIn.css">
+    <title>Sign in</title>
+</head>
+
+<body style="background: #c4c4c4;">
+<form action="http://localhost:3000/Admin/signIn" method="post">
+<div class="main" style = "height: 370px;">
+    <p class="sign" align="center">Admin Sign in</p>
+    <form class="singInForm">
+        <label>
+            <div class="container">
+                <input class="uName" type="text" name="userName" placeholder="Gmail">
+            </div>
+        </label>
+        <label>
+            <div class="container">
+                <input class="pass" name="password" type="password" placeholder="Password">
+            </div>
+            <a class="forgot" href="/forgotPage">Forgot Password?</a>
+<!--     Forgot password page       -->
+        </label>
+          <div class="signInError" id="signInError">
+                    <text class="signInErrorText" style="color:red"> [[signInError]] </text>
+                </div>
+                   <%c++ if(err.size() > 0){%>
+                    <script>
+                        let errPass = document.querySelector('#errorPassword');
+                        errPass.classList.remove('errorPassword');
+                    </script>
+                    <%c++}%>
+        <div class="container">
+            <button class="signInButton" align="center">
+                <text class="signInText">Sign in</text>
+            </button>
+        </div>
+    </form>
+</div>
+</form>
+</body>
+
+</html>
+
+

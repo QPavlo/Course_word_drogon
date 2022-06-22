@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<%inc#include "../controllers/utils/timeDateHandler.h" %>
+<%c++
+auto usersGeneral=@@.get<std::map<std::string, std::array<std::string, 3>>>("usersGeneralAll");
+auto usersStatisticAll=@@.get<std::map<std::string, std::array<std::string, 8>>>("usersStatisticAll");
+auto usersType = @@.get<int>("usersType");
+auto userBlockFlag = @@.get<int>("userBlockFlag");
+auto blockStatusText = @@.get<std::string>("blockStatus");
+auto unblockStatusFlag = @@.get<int>("userUnblockFlag");
+%>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/AttendanceCheck/attendanceCheck.css">
+    <link rel="stylesheet" href="/static/Admin/StatisticsUser.css">
+
+    <title>View employees</title>
+
+    <style>
+    form{
+        margin-bottom:0;
+    }
+    </style>
+</head>
+<body>
+
+<div id="myModal2" class="modal">
+    <div class="main">
+    <%c++ if(unblockStatusFlag == 1) {%>
+    <p class="banUserText" align="center" style="color: green;">
+      User: [[username]]<br> was {%blockStatusText%}</p>
+    <%c++ } else {%>
+        <p class="banUserText" align="center" style="color: #ea7217;">
+          User: [[username]]<br> was {%blockStatusText%}</p>
+    <%c++ }%>
+        <div class="exitForm">
+            <div class="container_ban">
+                <button class="exitSuccessButton" align="center" onclick="modal.style.display = 'none'">
+                    <text class="exitSuccess">Close</text>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sidenav" class="column">
+    <div class="sidenavHeader">
+
+    </div>
+    <div class="sidenavHeaderBottom">
+        <form action="http://localhost:3000/Admin/showUsers" method="post">
+            <button class="userTypeButton" onclick="usersType0()">All workers (no block)</button>
+            <button class="userTypeButton" onclick="usersType1()">Employment workers</button>
+            <button class="userTypeButton" onclick="usersType2()">Unemployment workers</button>
+            <button class="userTypeButton1" onclick="usersType3()">Temporary block workers</button>
+            <button class="userTypeButton1" onclick="usersType4()">Always block workers</button>
+
+            <input name="usersType" id="usersType" type="hidden">
+
+        </form>
+    </div>
+</div>
+
+<div id="AttendanceContent" class="column">
+    <div class="right_header">
+        <div class="dropdown">
+            <button><img id="profileImg" alt="profile" src="/static/AttendanceCheck/img/profile_img.png" height="48px"
+                         width="48px"></button>
+            <div class="dropdown-content">
+                <div class="profileButtons">
+                    <form action="http://localhost:3000/userSettingsPage" method="post">
+                        <button id="profileSetting">Profile setting</button>
+                    </form>
+                </div>
+                <div class="profileButtons">
+                    <form action="http://localhost:3000/start" method="get">
+                        <button id="logOut">Log out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style=" overflow: scroll;">
+    <table id="customers">
+      <tr>
+        <th>Firstname</th>
+        <th>Surname</th>
+        <th>Username</th>
+        <th>More</th>
+      </tr>
+
+      <%c++ for(const auto & entry:usersGeneral){%>
+      <%c++ if(usersType == 0) { %>
+      <%c++ if(entry.second[2] == "0") { %>
+      <tr style="    background-color: #ff8484;">
+
+        <td>{%entry.second[0]%}</td>
+        <td>{%entry.second[1]%}</td>
+        <td>{%entry.first%}</td>
+
+        <td class="moreTd"><div class="option">
+            <form action="http://localhost:3000/Admin/editEmptyUserPage" style="overflow: scroll;" method="post">
+                <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
+                <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                <input type="hidden" name="surname" value="{%entry.second[1]%}">
+            </form>
+
+            </div>
+        </td>
+      </tr>
+      <%c++ } else if(entry.second[2] == "1" or entry.second[2] == "5") {%>
+         <tr>
+
+                <td>{%entry.second[0]%}</td>
+                <td>{%entry.second[1]%}</td>
+                <td>{%entry.first%}</td>
+
+                <td class="moreTd">
+                <div class="option">
+                    <form action="http://localhost:3000/Admin/editUserPage" method="post">
+                        <button class="settingsButtonOnUserStat"  name="username" value="{%entry.first%}">Settings</button>
+                        <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                        <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                    </form>
+                </div>
+                    <div class="option">
+                      <form action="http://localhost:3000/Admin/ShowUserStatistics" method="post">
+                          <button class="statButtonOnUserStat" name="username" value="{%entry.first%}" >Statistics</button>
+                          <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                          <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                      </form>
+                    </div>
+                </td>
+              </tr>
+
+
+        <%c++ }
+         }else if(usersType == 1) {%>
+
+              <%c++ if(entry.second[2] == "1" or entry.second[2] == "5") { %>
+                  <tr>
+
+                    <td>{%entry.second[0]%}</td>
+                    <td>{%entry.second[1]%}</td>
+                    <td>{%entry.first%}</td>
+
+                    <td class="moreTd"><div class="option">
+                        <form action="http://localhost:3000/Admin/editUserPage" method="post">
+                            <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
+                            <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                            <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                        </form>
+                        </div>
+                          <div class="option">
+                              <form action="http://localhost:3000/Admin/ShowUserStatistics" method="post">
+                                    <button class="statButtonOnUserStat" name="username" value="{%entry.first%}" >Statistics</button>
+                              </form>
+                          </div>
+                    </td>
+
+
+
+                  </tr>
+                  <%c++ } %>
+        <%c++ } else if(usersType == 2) {%>
+
+        <%c++ if(entry.second[2] == "0") { %>
+                          <tr>
+                                <td>{%entry.second[0]%}</td>
+                                <td>{%entry.second[1]%}</td>
+                                <td>{%entry.first%}</td>
+                                <td class="moreTd">
+                                <div class="option">
+
+                                <form action="http://localhost:3000/Admin/editEmptyUserPage" method="post">
+                                        <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                                        <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                                        <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
+                                </form>
+
+                                </div>
+                                </td>
+                          </tr>
+      <%c++ } %>
+
+      <%c++ } else if(usersType == 3){ %>
+            <%c++ if(entry.second[2] == "3"){%>
+                  <tr>
+
+                                            <td>{%entry.second[0]%}</td>
+                                            <td>{%entry.second[1]%}</td>
+                                            <td>{%entry.first%}</td>
+                                            <td class="moreTd">
+                                            <div class="option">
+
+                                            <form action="http://localhost:3000/Admin/editUserPage" method="post">
+                                                    <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                                                    <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                                                    <input type="hidden" name="blockType" value="temp">
+                                                    <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
+                                            </form>
+                                            </div>
+                                            </td>
+                                          </tr>
+            <%c++ }%>
+      <%c++ }else if(usersType == 4){ %>
+                  <%c++ if(entry.second[2] == "4"){%>
+                        <tr>
+                                                  <td>{%entry.second[0]%}</td>
+                                                  <td>{%entry.second[1]%}</td>
+                                                  <td>{%entry.first%}</td>
+                                                  <td class="moreTd">
+                                                  <div class="option">
+
+                                                  <form action="http://localhost:3000/Admin/editUserPage" method="post">
+                                                          <input type="hidden" name="firstname" value="{%entry.second[0]%}">
+                                                          <input type="hidden" name="surname" value="{%entry.second[1]%}">
+                                                           <input type="hidden" name="blockType" value="forever">
+                                                          <button class="settingsButtonOnUserStat" name="username" value="{%entry.first%}">Settings</button>
+                                                  </form>
+
+                                                  </div>
+                                                  </td>
+                                                </tr>
+                  <%c++ }%>
+            <%c++ }%>
+
+      <%c++ }%>
+    </table>
+
+    </div>
+</div>
+
+<script>
+                function usersType0(){
+                   const usersType = document.getElementById('usersType');
+                   usersType.value = '0';
+                }
+
+                function usersType1(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '1';
+                }
+
+                function usersType2(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '2';
+                }
+
+                function usersType3(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '3';
+                }
+
+                function usersType4(){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = '4';
+                }
+
+                function setUserName(username){
+                    const usersType = document.getElementById('usersType');
+                    usersType.value = username;
+                }
+
+                       let modal = document.getElementById("myModal2");
+                                    <%c++ if(userBlockFlag == 1 || unblockStatusFlag == 1) { %>
+                                         modal.style.display = 'block';
+                                    <%c++ } %>
+
+</script>
+
+</body>
+</html>
